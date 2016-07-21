@@ -1,12 +1,13 @@
-var d = 50;
-var grow = true;
-var gap = 5;
-var border = 5;
-var w=600,h=600;
-var ix = 0;
-var arcs = [];
+var d = 50,
+  grow = true,
+  gap = 5,
+  border = 5,
+  w=600,h=600,
+  ix = 0,
+  arcs = [];
 
-var ps = [];
+var offsetY = 300,
+  offsetX = 100;
 
 function setup() {
   var ix = 0;
@@ -26,21 +27,19 @@ function draw() {
 
   background(255,99,00);
   strokeWeight(border);
-  
-  if (mouseIsPressed) {
-    fill(0);
-  } else {
-    fill(255);
-  }
-  
+
   if(grow){
     d += gap;
+    offsetX += 1;
+    offsetY -= 1;
     style1();
     if(d==250){
        grow = false;
     }
   } else {
     d -= gap;
+    offsetX -= 1;
+    offsetY += 1;
     style2();
     if(d==50){
        grow = true;
@@ -50,7 +49,8 @@ function draw() {
   ellipse(w/2, h/2, d, d);
 
   styleArc();
-  arc(w/2, h/2, d+30, d+30, arcs[ix].from, arcs[ix].to);
+  arc(w/2, h/2, d+offsetY, d+offsetX, arcs[ix].from, arcs[ix].to);
+  arc(w/2, h/2, d+offsetX, d+offsetY, arcs[ix].from, arcs[ix].to);
   ix = (ix==arcs.length-1)?0:ix+1;
   
   followLine();
