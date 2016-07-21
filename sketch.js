@@ -2,7 +2,7 @@ var d = 50,
   grow = true,
   gap = 5,
   border = 5,
-  w=600,h=600,
+  w,h,
   ix = 0,
   arcs = [];
 
@@ -10,6 +10,8 @@ var offsetY = 300,
   offsetX = 100;
 
 function setup() {
+  w=windowWidth;
+  h=windowHeight;
   var ix = 0;
   arcs = [
     {from:0,to:HALF_PI},
@@ -27,6 +29,12 @@ function draw() {
 
   background(255,99,00);
   strokeWeight(border);
+  
+  for(var i=0;i<500;i++){
+      noStroke();
+      fill(random(255));
+      ellipse(random(width), random(height), 30, 30);
+  }
 
   if(grow){
     d += gap;
@@ -53,7 +61,8 @@ function draw() {
   arc(w/2, h/2, d+offsetX, d+offsetY, arcs[ix].from, arcs[ix].to);
   ix = (ix==arcs.length-1)?0:ix+1;
   
-  followLine();
+  triangles();
+  
 }
 
 function style1(){
@@ -72,16 +81,15 @@ function styleArc(){
     stroke(0,255,0);
 }
 
-function followLine(){
+function triangles(){
+  stroke(55,55,55);
+  fill(0,200,0);
   
-  /*strokeWeight(1);
-  p1 = {x: 200, y: 200}, p2 = {x: 73, y: 24};
-  p3 = {x: 73, y: 61}, p4 = {x: 15, y: 65};
-  noFill();
-  stroke(255, 102, 0);
-  curve(p1.x, p1.y, p1.x, p1.y, p2.x, p2.y, p3.x, p3.y);
-  stroke(0);
-  curve(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y, p4.x, p4.y);
-  stroke(255, 102, 0);
-  curve(p2.x, p2.y, p3.x, p3.y, p4.x, p4.y, p4.x, p4.y);*/
+  if(mouseX > width/2){
+    triangle(0,0,0,height, mouseX, mouseY);
+  } else {
+    triangle(width,0,width, height, mouseX, mouseY);
+  }
+  
 }
+
