@@ -27,7 +27,7 @@ function setup() {
 
 function draw() {
 
-  background(255,99,00);
+  background(255,99,0);
   strokeWeight(border);
   
   for(var i=0;i<500;i++){
@@ -82,8 +82,8 @@ function styleArc(){
 }
 
 function triangles(){
-  stroke(55,55,55);
-  fill(0,200,0);
+  noStroke();
+  fill('rgba(0,0,0,0.5)');
   
   if(mouseX > width/2){
     triangle(0,0,0,height, mouseX, mouseY);
